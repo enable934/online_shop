@@ -27,15 +27,14 @@
                         <a class="nav-link" href="#">Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Login page</a>
+                        <a class="nav-link" href="login.jsp">Login page</a>
                     </li>
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
-                ${sessionScope.session}
-                <button class="btn btn-outline-success" type="submit">Logout</button>
+                <button class="btn btn-outline-success" type="submit">${sessionScope.user.firstname}</button>
             </div>
         </div>
     </nav>

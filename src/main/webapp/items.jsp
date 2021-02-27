@@ -29,7 +29,7 @@
                         <a class="nav-link" href="#">Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Login page</a>
+                        <a class="nav-link" href="login.jsp">Login page</a>
                     </li>
                 </ul>
                 <form class="d-flex">

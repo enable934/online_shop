@@ -1,9 +1,5 @@
 package services;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
@@ -17,7 +13,7 @@ public class DBManager {
         return DriverManager.getConnection(url, username, password);
     }
 
-    public ResultSet select(String selectQuery, PrintWriter writer) throws SQLException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException {
+    public ResultSet select(String selectQuery) throws SQLException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException {
         Connection conn = getConnection();
         Statement statement = conn.createStatement();
         return statement.executeQuery(selectQuery);

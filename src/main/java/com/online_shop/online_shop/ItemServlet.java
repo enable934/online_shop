@@ -24,7 +24,7 @@ public class ItemServlet extends HttpServlet {
 
         ArrayList<Item> result = new ArrayList<Item>();
         try{
-            ResultSet items = manager.select("SELECT id, name, description, price FROM item", writer);
+            ResultSet items = manager.select("SELECT id, name, description, price FROM item");
             if(items == null)
                 writer.println("items == null");
             while(items.next()){
