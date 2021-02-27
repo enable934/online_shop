@@ -19,4 +19,11 @@ public class DBManager {
         return statement.executeQuery(selectQuery);
     }
 
+    // In this perfect language executeUpdate used for INSERT/UPDATE/DELETE ...
+    public int update(String updateQuery) throws SQLException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException {
+        Connection conn = getConnection();
+        Statement statement = conn.createStatement();
+        return statement.executeUpdate(updateQuery);
+    }
+
 }

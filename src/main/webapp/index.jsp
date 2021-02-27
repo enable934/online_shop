@@ -9,6 +9,7 @@
     <link rel="icon" href="assets/logo.png" sizes="16x16" type="image/png">
     <meta name="theme-color" content="#7952b3">
     <link href="assets/css/home/home.css" rel="stylesheet">
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
 <body>
 <div class="container-fluid">
@@ -39,139 +40,21 @@
         </div>
     </nav>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6">
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Wooden PC</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">PC</h6>
-                    <p class="card-text">Super wooden PC.</p>
-                    <a href="#" class="card-link">Buy</a>
-                    <a href="#" class="card-link">Add to Wishlist</a>
+        <c:forEach var="item" items="${items}">
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">${item.getName()}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">PC</h6>
+                        <p class="card-text">${item.getDescription()}</p>
+                        <a href="#" class="card-link">Buy</a>
+                        <a href="#" class="card-link">Add to Wishlist</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Wooden PC</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">PC</h6>
-                    <p class="card-text">Super wooden PC.</p>
-                    <a href="#" class="card-link">Buy</a>
-                    <a href="#" class="card-link">Add to Wishlist</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Wooden PC</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">PC</h6>
-                    <p class="card-text">Super wooden PC.</p>
-                    <a href="#" class="card-link">Buy</a>
-                    <a href="#" class="card-link">Add to Wishlist</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Wooden PC</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">PC</h6>
-                    <p class="card-text">Super wooden PC.</p>
-                    <a href="#" class="card-link">Buy</a>
-                    <a href="#" class="card-link">Add to Wishlist</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Not wooden PC</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">PC</h6>
-                    <p class="card-text">Super not wooden PC.</p>
-                    <a href="#" class="card-link">Buy</a>
-                    <a href="#" class="card-link">Add to Wishlist</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Fast PC</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">PC</h6>
-                    <p class="card-text">Super fast PC.</p>
-                    <a href="#" class="card-link">Buy</a>
-                    <a href="#" class="card-link">Add to Wishlist</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Wooden PC</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">PC</h6>
-                    <p class="card-text">Super wooden PC.</p>
-                    <a href="#" class="card-link">Buy</a>
-                    <a href="#" class="card-link">Add to Wishlist</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Not wooden PC</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">PC</h6>
-                    <p class="card-text">Super not wooden PC.</p>
-                    <a href="#" class="card-link">Buy</a>
-                    <a href="#" class="card-link">Add to Wishlist</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Not wooden PC</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">PC</h6>
-                    <p class="card-text">Super not wooden PC.</p>
-                    <a href="#" class="card-link">Buy</a>
-                    <a href="#" class="card-link">Add to Wishlist</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Not wooden PC</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">PC</h6>
-                    <p class="card-text">Super not wooden PC.</p>
-                    <a href="#" class="card-link">Buy</a>
-                    <a href="#" class="card-link">Add to Wishlist</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Not wooden PC</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">PC</h6>
-                    <p class="card-text">Super not wooden PC.</p>
-                    <a href="#" class="card-link">Buy</a>
-                    <a href="#" class="card-link">Add to Wishlist</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Fast PC</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">PC</h6>
-                    <p class="card-text">Super fast PC.</p>
-                    <a href="#" class="card-link">Buy</a>
-                    <a href="#" class="card-link">Add to Wishlist</a>
-                </div>
-            </div>
-        </div>
+        </c:forEach>
     </div>
+    <h1>Total items count: ${size}</h1>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
             crossorigin="anonymous"></script>

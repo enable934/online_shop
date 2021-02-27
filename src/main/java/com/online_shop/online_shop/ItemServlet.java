@@ -1,6 +1,7 @@
 package com.online_shop.online_shop;
 
 import javaBean.Item;
+import javaBean.ItemDB;
 import services.DBManager;
 
 import java.io.*;
@@ -15,35 +16,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet("/item")
+@WebServlet(name = "indexServlet", value = "/")
 public class ItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DBManager manager = new DBManager();
         PrintWriter writer = resp.getWriter();
 
-        ArrayList<Item> result = new ArrayList<Item>();
-        try{
-            ResultSet items = manager.select("SELECT id, name, description, price FROM item");
-            if(items == null)
-                writer.println("items == null");
-            while(items.next()){
-                Item temp = new Item(items.getInt(1),
-                    items.getString(2),
-                    items.getString(3),
-                    items.getInt(4));
-                result.add(temp);
-            }
-        }
-        catch(Exception e){
-            writer.println(e);
-            writer.println(e.getMessage());
-            writer.println(e.getCause());
-        }
+        ArrayList<Item> result = ItemDB.select(writer);
+
         writer.println(result.size());
         req.setAttribute("items", result);
         req.setAttribute("size", result.size());
-        RequestDispatcher view = req.getRequestDispatcher("items.jsp");
+        RequestDispatcher view = req.getRequestDispatcher("index.jsp");
         view.forward(req, resp);
     }
 }
