@@ -15,7 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet("/item")
+@WebServlet(name = "indexServlet", value = "/")
 public class ItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,7 +43,7 @@ public class ItemServlet extends HttpServlet {
         writer.println(result.size());
         req.setAttribute("items", result);
         req.setAttribute("size", result.size());
-        RequestDispatcher view = req.getRequestDispatcher("items.jsp");
+        RequestDispatcher view = req.getRequestDispatcher("index.jsp");
         view.forward(req, resp);
     }
 }
