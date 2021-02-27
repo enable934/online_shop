@@ -17,10 +17,17 @@ public class DBManager {
         return DriverManager.getConnection(url, username, password);
     }
 
-    public ResultSet select(String selectQuery, PrintWriter writer) throws SQLException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException {
+    public ResultSet select(String selectQuery) throws SQLException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException {
         Connection conn = getConnection();
         Statement statement = conn.createStatement();
         return statement.executeQuery(selectQuery);
+    }
+
+    // In this perfect language executeUpdate used for INSERT/UPDATE/DELETE ...
+    public int update(String updateQuery) throws SQLException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException {
+        Connection conn = getConnection();
+        Statement statement = conn.createStatement();
+        return statement.executeUpdate(updateQuery);
     }
 
 }
