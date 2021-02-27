@@ -1,4 +1,5 @@
-<html lang="en"><head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -28,7 +29,9 @@
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
-            }login-handler
+            }
+
+            login-handler
         }
     </style>
 
@@ -54,71 +57,101 @@
         position: fixed;
         user-select: none;
         transition: left .5s, right .5s;
-        right: 0px; }
+        right: 0px;
+    }
+
     .backpack.dropzone .animation {
         height: 80px;
         width: 250px;
-        background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center; }
+        background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center;
+    }
+
     .backpack.dropzone .title::before {
-        content: 'Save to'; }
+        content: 'Save to';
+    }
+
     .backpack.dropzone.closed {
-        right: -250px; }
+        right: -250px;
+    }
+
     .backpack.dropzone.hover .animation {
         animation: sxt-play-anim-hover 0.91s steps(21);
         animation-fill-mode: forwards;
-        background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center; }
+        background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center;
+    }
 
     @keyframes sxt-play-anim-hover {
         from {
-            background-position: 0px; }
+            background-position: 0px;
+        }
         to {
-            background-position: -5250px; } }
+            background-position: -5250px;
+        }
+    }
+
     .backpack.dropzone.saving .title::before {
-        content: 'Saving to'; }
+        content: 'Saving to';
+    }
+
     .backpack.dropzone.saving .animation {
         background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/saving_loop.png") left center;
-        animation: sxt-play-anim-saving steps(59) 2.46s infinite; }
+        animation: sxt-play-anim-saving steps(59) 2.46s infinite;
+    }
 
     @keyframes sxt-play-anim-saving {
         100% {
-            background-position: -14750px; } }
+            background-position: -14750px;
+        }
+    }
+
     .backpack.dropzone.saved .title::before {
-        content: 'Saved to'; }
+        content: 'Saved to';
+    }
+
     .backpack.dropzone.saved .animation {
         background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/saved.png") left center;
-        animation: sxt-play-anim-saved steps(20) 0.83s forwards; }
+        animation: sxt-play-anim-saved steps(20) 0.83s forwards;
+    }
 
     @keyframes sxt-play-anim-saved {
         100% {
-            background-position: -5000px; } }
-    </style><meta id="Reverso_extension___elForCheckedInstallExtension" name="Reverso extension" content="2.2.202"><script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script></head>
+            background-position: -5000px;
+        }
+    }
+    </style>
+    <meta id="Reverso_extension___elForCheckedInstallExtension" name="Reverso extension" content="2.2.202">
+    <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+</head>
 <body class="text-center">
 
 <main class="form-signin">
-    <form action="login-handler" method="post">
+    <form action="login" method="post">
         <img class="mb-4" src="assets/logo.png" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
         <label for="inputEmail" class="visually-hidden">Email address</label>
-        <input type="text" id="inputEmail" name="email" class="form-control" placeholder="Email address" required="" autofocus="">
+        <input type="text" id="inputEmail" name="email"
+               class="form-control ${sessionScope.error != null ? "is-invalid" : ""}" placeholder="Email address"
+               required="" autofocus=""
+               aria-describedby="validationServerUsernameFeedback"
+        >
+        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+            Please enter a valid username.
+        </div>
         <label for="inputPassword" class="visually-hidden">Password</label>
-        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="">
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
+        <input type="password" id="inputPassword" name="password"
+               class="form-control ${sessionScope.error != null ? "is-invalid" : ""}" placeholder="Password"
+               required=""
+               aria-describedby="validationServerPasswordFeedback"
+        >
+        <div id="validationServerPasswordFeedback" class="invalid-feedback">
+            Please enter a valid password.
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted">© 2021</p>
     </form>
 
-    <form action="dbConnector" method="post">
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Connect</button>
-    </form>
-
 </main>
 
 
-
-
-
-</body></html>
+</body>
+</html>

@@ -19,6 +19,9 @@ services:
       - ./target:/usr/local/tomcat/webapps
     ports:
       - 80:8080
+      - 5005:8000
+    environment:
+      - JAVA_OPTS= -agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=n
 
 volumes:
   java_db:
