@@ -1,21 +1,25 @@
-package javaBean;
-import services.DBManager;
+package services;
+
+import javaBean.Item;
 
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-public class ItemDB {
+public class ItemService {
+    private final DBManager dbManager;
 
-    private static DBManager manager = new DBManager();
+    public ItemService(){
+        this.dbManager = new DBManager();
+    }
 
     @org.jetbrains.annotations.NotNull
-    public static ArrayList<Item> select(PrintWriter writer) {
+    public ArrayList<Item> select(PrintWriter writer) {
         ArrayList<Item> result = new ArrayList<Item>();
 
         try{
-            ResultSet items = manager.select("SELECT id, name, description, price FROM item");
+            ResultSet items = dbManager.select("SELECT id, name, description, price FROM item");
             if(items == null)
                 writer.println("items == null");
             while(items.next()){
@@ -36,11 +40,35 @@ public class ItemDB {
     }
 
     @org.jetbrains.annotations.NotNull
-    public static ArrayList<Item> selectByName(String targetName, boolean selectFirst, PrintWriter writer) {
+    public Item selectById(int targetId, PrintWriter writer) {
+        Item result = null;
+
+        try{
+            ResultSet items = dbManager.select("SELECT id, name, description, price FROM item where id = " + targetId);
+            if(items == null)
+                writer.println("items == null");
+            while(items.next()){
+                return new Item(items.getInt(1),
+                        items.getString(2),
+                        items.getString(3),
+                        items.getInt(4));
+            }
+        }
+        catch(Exception e){
+            writer.println(e);
+            writer.println(e.getMessage());
+            writer.println(e.getCause());
+        }
+
+        return result;
+    }
+
+    @org.jetbrains.annotations.NotNull
+    public ArrayList<Item> selectByName(String targetName, boolean selectFirst, PrintWriter writer) {
         ArrayList<Item> result = new ArrayList<Item>();
 
         try{
-            ResultSet items = manager.select("SELECT id, name, description, price FROM item where name = " + targetName);
+            ResultSet items = dbManager.select("SELECT id, name, description, price FROM item where name = " + targetName);
             if(items == null)
                 writer.println("items == null");
             while(items.next()){
@@ -64,12 +92,12 @@ public class ItemDB {
     }
 
     @org.jetbrains.annotations.NotNull
-    public static void insert(Item newItem, PrintWriter writer) {
+    public void insert(Item newItem, PrintWriter writer) {
         try{
             String insertStatement = String.format("INSERT INTO item (name, description, price, created_at) Values ('%s', '%s', %s, %s)",
                     newItem.getName(), newItem.getDescription(), newItem.getPrice(), new Timestamp(System.currentTimeMillis()));
 
-            manager.update(insertStatement);
+            dbManager.update(insertStatement);
         }
         catch(Exception e){
             writer.println(e);
@@ -79,12 +107,12 @@ public class ItemDB {
     }
 
     @org.jetbrains.annotations.NotNull
-    public static int update(int targetId, Item targetUpdatedItem, PrintWriter writer) {
+    public int update(int targetId, Item targetUpdatedItem, PrintWriter writer) {
         try{
             String updateStatement = String.format("UPDATE item SET name = '%s', description = '%s', price = %s where id = %s",
                     targetUpdatedItem.getName(), targetUpdatedItem.getDescription(), targetUpdatedItem.getPrice(), targetId);
 
-            return manager.update(updateStatement);
+            return dbManager.update(updateStatement);
         }
         catch(Exception e){
             writer.println(e);
@@ -96,12 +124,12 @@ public class ItemDB {
     }
 
     @org.jetbrains.annotations.NotNull
-    public static int delete(int targetId, PrintWriter writer) {
+    public int delete(int targetId, PrintWriter writer) {
         try{
             String deleteStatement = String.format("DELETE FROM item where id = %s",
                     targetId);
 
-            return manager.update(deleteStatement);
+            return dbManager.update(deleteStatement);
         }
         catch(Exception e){
             writer.println(e);
@@ -113,7 +141,7 @@ public class ItemDB {
     }
 
     @org.jetbrains.annotations.NotNull
-    public static int deleteByParams(Item targetParams, PrintWriter writer) {
+    public int deleteByParams(Item targetParams, PrintWriter writer) {
         try{
             String targetName = targetParams.getName();
             String targetDes = targetParams.getDescription();
@@ -145,7 +173,7 @@ public class ItemDB {
             }
 
             if (executeDelete)
-                return manager.update(deleteStatement);
+                return dbManager.update(deleteStatement);
         }
         catch(Exception e){
             writer.println(e);
