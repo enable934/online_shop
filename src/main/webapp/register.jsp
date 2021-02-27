@@ -113,9 +113,11 @@
 
 <main class="form-signin">
     <form action="register" method="post">
-        <a class="text-center" href="./">
-            <img class="mb-4" src="assets/logo.png" alt="" width="72" height="57">
-        </a>
+        <div class="text-center">
+            <a href="./">
+                <img class="mb-4" src="assets/logo.png" alt="" width="72" height="57">
+            </a>
+        </div>
         <h1 class="h3 mb-3 fw-normal text-center">Register</h1>
         <label for="firstname" class="form-label">First name</label>
         <input type="text" id="firstname" name="firstname"
