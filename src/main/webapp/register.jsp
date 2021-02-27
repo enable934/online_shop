@@ -5,7 +5,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.80.0">
-    <title>Signin Template · Bootstrap v5.0</title>
+    <title>Register</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -18,20 +18,11 @@
 
 
     <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
 
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
             }
-
-            login-handler
         }
     </style>
 
@@ -68,10 +59,6 @@
 
     .backpack.dropzone .title::before {
         content: 'Save to';
-    }
-
-    .backpack.dropzone.closed {
-        right: -250px;
     }
 
     .backpack.dropzone.hover .animation {
@@ -122,35 +109,60 @@
     <meta id="Reverso_extension___elForCheckedInstallExtension" name="Reverso extension" content="2.2.202">
     <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
 </head>
-<body class="text-center">
+<body>
 
 <main class="form-signin">
-    <form action="login" method="post">
-        <a href="./">
+    <form action="register" method="post">
+        <a class="text-center" href="./">
             <img class="mb-4" src="assets/logo.png" alt="" width="72" height="57">
         </a>
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-        <label for="inputEmail" class="visually-hidden">Email address</label>
-        <input type="text" id="inputEmail" name="email"
-               class="form-control ${error != null ? "is-invalid" : ""}" placeholder="Email address"
+        <h1 class="h3 mb-3 fw-normal text-center">Register</h1>
+        <label for="firstname" class="form-label">First name</label>
+        <input type="text" id="firstname" name="firstname"
+               class="form-control ${firstname != null ? "is-invalid" : ""}" placeholder="Ivan"
                required="" autofocus=""
-               aria-describedby="validationServerUsernameFeedback"
+               aria-describedby="validationServerFirstnameFeedback"
         >
-        <div id="validationServerUsernameFeedback" class="invalid-feedback">
-            Please enter a valid username.
+        <div id="validationServerFirstnameFeedback" class="invalid-feedback">
+            Please enter firstname.
         </div>
-        <label for="inputPassword" class="visually-hidden">Password</label>
+        <label for="lastname" class="form-label text-start">Last name</label>
+        <input type="text" id="lastname" name="lastname"
+               class="form-control ${lastname != null ? "is-invalid" : ""}" placeholder="Ivanov"
+               required="" autofocus=""
+               aria-describedby="validationServerLastnameFeedback"
+        >
+        <div id="validationServerLastnameFeedback" class="invalid-feedback">
+            Please enter lastname.
+        </div>
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" name="email"
+               class="form-control ${email != null ? "is-invalid" : ""}" placeholder="ivan_ivanov@gmail.com"
+               required="" autofocus=""
+               aria-describedby="validationServerEmailFeedback"
+        >
+        <div id="validationServerEmailFeedback" class="invalid-feedback">
+            Please enter valid email.
+        </div>
+        <label for="inputPassword" class="form-label">Password</label>
         <input type="password" id="inputPassword" name="password"
-               class="form-control ${error != null ? "is-invalid" : ""}" placeholder="Repeat Password"
+               class="form-control ${password != null ? "is-invalid" : ""}" placeholder="Password"
                required=""
                aria-describedby="validationServerPasswordFeedback"
         >
         <div id="validationServerPasswordFeedback" class="invalid-feedback">
-            Please enter a valid password.
+            Passwords not match.
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-        <a type="button" class="btn btn-link" href="register">or register</a>
-        <p class="mt-5 mb-3 text-muted">© 2021</p>
+        <input type="password" id="passwordConfirm" name="passwordConfirm"
+               class="form-control ${password != null ? "is-invalid" : ""}" placeholder="Repeat Password"
+               required=""
+               aria-describedby="validationServerPasswordConfirmFeedback"
+        >
+        <div id="validationServerPasswordConfirmFeedback" class="invalid-feedback">
+            Passwords not match.
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+        <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
     </form>
 
 </main>

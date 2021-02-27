@@ -50,8 +50,7 @@ public class LoginServlet extends HttpServlet {
 
     private void redirectToLoginPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher view = req.getRequestDispatcher("login.jsp");
-        HttpSession session = req.getSession();
-        session.setAttribute("error", "Email or password not valid");
+        req.setAttribute("error", "Email or password not valid");
         view.forward(req, resp);
     }
 }
