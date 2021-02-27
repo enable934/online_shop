@@ -12,5 +12,13 @@ services:
     volumes:
       - java_db:/var/lib/postgresql/data
       - ./DB/Update_structure.sql:/docker-entrypoint-initdb.d/Update_structure.sql
+
+  tomcat:
+    image: tomcat:latest
+    volumes:
+      - ./target:/usr/local/tomcat/webapps
+    ports:
+      - 80:8080
+
 volumes:
   java_db:
