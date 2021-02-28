@@ -1,6 +1,7 @@
 package com.online_shop.online_shop.item;
 
 import javaBean.Item;
+import javaBean.User;
 import services.ItemService;
 
 import javax.servlet.RequestDispatcher;
@@ -24,6 +25,11 @@ public class ItemManagementServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User currentUser = (User)req.getSession().getAttribute("user");
+        if(currentUser == null || !currentUser.isAdmin()){
+            resp.sendRedirect("../403.jsp");
+            return;
+        }
         PrintWriter writer = resp.getWriter();
 
         ArrayList<Item> result = itemService.select(writer);

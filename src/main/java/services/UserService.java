@@ -21,14 +21,16 @@ public class UserService {
     public Optional<User> fetchUser(String email, String password) {
         try {
             String passwordHashed = this.passwordHasher.hash(password);
-            ResultSet users = this.dbManager.select("SELECT firstname, lastname, phone, address, email FROM customer " +
+            ResultSet users = this.dbManager.select("SELECT firstname, lastname, phone, address, email, isadmin FROM customer " +
                     String.format("where email='%s' and password_hash='%s'", email, passwordHashed));
             while (users.next()) {
                 User user = new User(users.getString(1),
                         users.getString(2),
                         users.getString(3),
                         users.getString(4),
-                        users.getString(5));
+                        users.getString(5),
+                        users.getBoolean(6)
+                );
                 return Optional.of(user);
             }
         } catch (Exception e) {

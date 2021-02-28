@@ -26,7 +26,7 @@ public class ItemService {
                 Item temp = new Item(items.getInt(1),
                         items.getString(2),
                         items.getString(3),
-                        items.getInt(4));
+                        items.getFloat(4));
                 result.add(temp);
             }
         }
