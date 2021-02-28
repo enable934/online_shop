@@ -26,7 +26,7 @@
 <body>
     <div class="container-fluid">
         <jsp:include page="../header.jsp"/>
-        <a href="createItem" class="btn btn btn-outline-warning" role="button" style="margin-top: 10px;">Create new item</a>
+        <a href="newItem" class="btn btn btn-outline-warning" role="button" style="margin-top: 10px;">Create new item</a>
         <h1>Items in system:</h1>
         <table class="table table-striped">
             <thead>

@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="container-fluid">
-        <jsp:include page="header.jsp"/>
+        <jsp:include page="../header.jsp"/>
         <form action="newItem" method="post">
             <h1 class="h3 mb-3 fw-normal text-center">Add new item:</h1>
             <label for="itemName" class="form-label">Item name</label>
