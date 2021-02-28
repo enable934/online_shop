@@ -19,7 +19,7 @@ public class ItemService {
         ArrayList<Item> result = new ArrayList<Item>();
 
         try{
-            ResultSet items = dbManager.select("SELECT id, name, description, price FROM item");
+            ResultSet items = dbManager.select("SELECT id, name, description, price FROM item where isDeleted = false");
             if(items == null)
                 writer.println("items == null");
             while(items.next()){
@@ -44,7 +44,7 @@ public class ItemService {
         Item result = null;
 
         try{
-            ResultSet items = dbManager.select("SELECT id, name, description, price FROM item where id = " + targetId);
+            ResultSet items = dbManager.select("SELECT id, name, description, price FROM item where isDeleted = false and id = " + targetId);
             if(items == null)
                 writer.println("items == null");
             while(items.next()){
@@ -68,7 +68,7 @@ public class ItemService {
         ArrayList<Item> result = new ArrayList<Item>();
 
         try{
-            ResultSet items = dbManager.select("SELECT id, name, description, price FROM item where name = " + targetName);
+            ResultSet items = dbManager.select("SELECT id, name, description, price FROM item where isDeleted = false and name = " + targetName);
             if(items == null)
                 writer.println("items == null");
             while(items.next()){
@@ -126,7 +126,7 @@ public class ItemService {
     @org.jetbrains.annotations.NotNull
     public int delete(int targetId, PrintWriter writer) {
         try{
-            String deleteStatement = String.format("DELETE FROM item where id = %s",
+            String deleteStatement = String.format("UPDATE item SET isDeleted = true where id = %s",
                     targetId);
 
             return dbManager.update(deleteStatement);
@@ -146,7 +146,7 @@ public class ItemService {
             String targetName = targetParams.getName();
             String targetDes = targetParams.getDescription();
             float targetPrice = targetParams.getPrice();
-            String deleteStatement = "DELETE FROM item where";
+            String deleteStatement = "UPDATE item SET isDeleted = true where";
             boolean executeDelete = false;
 
             if (!targetName.isEmpty()) {

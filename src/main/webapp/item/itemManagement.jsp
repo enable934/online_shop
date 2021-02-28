@@ -43,7 +43,7 @@
                         <a>   </a>
                         <a href="editItem?id=${item.getId()}" class="btn btn-outline-info" role="button">Edit</a>
                         <form method="post" action='<c:url value="/item/deleteItem"/>' style="display:inline;">
-                            <input type="hidden" name="id" value="${item.id}">
+                            <input type="hidden" name="targetId" value="${item.getId()}">
                             <input type="submit" class="btn btn-outline-danger" role="button" value="Delete">
                         </form>
                     </td>

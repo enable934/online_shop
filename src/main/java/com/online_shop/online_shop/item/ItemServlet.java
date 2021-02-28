@@ -1,4 +1,4 @@
-package com.online_shop.online_shop;
+package com.online_shop.online_shop.item;
 
 import DTOs.ReviewDTO;
 import javaBean.Item;
