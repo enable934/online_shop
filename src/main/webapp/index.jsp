@@ -18,15 +18,14 @@
     <h1>Items in system:</h1>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6">
         <c:forEach var="item" items="${items}">
-            <div class="col">
-                <div class="card" style="width: 18rem;">
+            <div class="col-6">
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">${item.getName()}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">PC</h6>
                         <p class="card-text">${item.getDescription()}</p>
-                        <a href="#" class="card-link">Buy</a>
-                        <a href="#" class="card-link">Add to Wishlist</a>
-                        <a href="item.jsp?id=${item.getId()}" class="card-link">Open item</a>
+                        <a href="#" class="btn btn-outline-primary" role="button">Buy</a>
+                        <a href="item?id=${item.getId()}" class="btn btn btn-outline-warning" role="button">Open item</a>
                     </div>
                 </div>
             </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><%=request.getAttribute("itemName")%></title>
+    <title>${item.getName()}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="icon" href="assets/logo.png" sizes="32x32" type="image/png">
@@ -21,28 +21,37 @@
             <div class="card mt-4">
                 <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
                 <div class="card-body">
-                    <h3 class="card-title">Product Name</h3>
-                    <h4>$24.99</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
-                    <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                    4.0 stars
+                    <h3 class="card-title">${item.getName()}</h3>
+                    <h4>$${item.getPrice()}</h4>
+                    <p class="card-text">${item.getDescription()}</p>
+                    <c:choose>
+                        <c:when test="${reviewScore == 0}"><span class="text-warning">&#9734; &#9734; &#9734; &#9734; &#9734;</span> 0 stars</c:when>
+                        <c:when test="${reviewScore == 1}"><span class="text-warning">&#9733; &#9734; &#9734; &#9734; &#9734;</span> 1 star</c:when>
+                        <c:when test="${reviewScore == 2}"><span class="text-warning">&#9733; &#9733; &#9734; &#9734; &#9734;</span> 2 stars</c:when>
+                        <c:when test="${reviewScore == 3}"><span class="text-warning">&#9733; &#9733; &#9733; &#9734; &#9734;</span> 3 stars</c:when>
+                        <c:when test="${reviewScore == 4}"><span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span> 4 stars</c:when>
+                        <c:when test="${reviewScore == 5}"><span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9733;</span> 5 stars</c:when>
+                        <c:when test="${reviewScore == -1}"><span class="text-warning">No reviews yet</span></c:when>
+                        <c:otherwise>undefined</c:otherwise>
+                    </c:choose>
                 </div>
             </div>
 
             <div class="card card-outline-secondary my-4">
                 <div class="card-header">
-                    Product Reviews
+                    Item Reviews
                 </div>
                 <div class="card-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                    <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                    <hr>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                    <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                    <hr>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                    <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                    <hr>
+                    <c:if test="${reviews.size() > 0}">
+                        <c:forEach var="review" items="${reviews}">
+                            <div class="col">
+                                <p>${review.getText()}</p>
+                                <small class="text-muted">Posted by ${review.getCustomer_name()} on ${review.getDate()}</small>
+                                <hr>
+                            </div>
+                        </c:forEach>
+                    </c:if>
+
                     <a href="#" class="btn btn-success">Leave a Review</a>
                 </div>
             </div>
