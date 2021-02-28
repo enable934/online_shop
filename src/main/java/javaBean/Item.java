@@ -16,6 +16,12 @@ public class Item implements Serializable {
         this.price = 0;
     }
 
+    public Item(String name, String description, float price) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
     public Item(int id, String name, String description, float price) {
         this.id = id;
         this.name = name;

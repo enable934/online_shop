@@ -92,18 +92,20 @@ public class ItemService {
     }
 
     @org.jetbrains.annotations.NotNull
-    public void insert(Item newItem, PrintWriter writer) {
+    public int addItem(Item newItem, PrintWriter writer) {
         try{
-            String insertStatement = String.format("INSERT INTO item (name, description, price, created_at) Values ('%s', '%s', %s, %s)",
-                    newItem.getName(), newItem.getDescription(), newItem.getPrice(), new Timestamp(System.currentTimeMillis()));
+            String insertStatement = String.format("INSERT INTO item (name, description, price, created_at) Values ('%s', '%s', %s, current_timestamp)",
+                    newItem.getName(), newItem.getDescription(), newItem.getPrice());
 
-            dbManager.update(insertStatement);
+            return dbManager.update(insertStatement);
         }
         catch(Exception e){
             writer.println(e);
             writer.println(e.getMessage());
             writer.println(e.getCause());
         }
+
+        return 0;
     }
 
     @org.jetbrains.annotations.NotNull

@@ -46,11 +46,10 @@ public class RegistrationServlet extends HttpServlet {
 
         int rowsAffected = this.userService.registerNewUser(firstname, lastname, email, password);
         if (rowsAffected < 1) {
-            this.redirectToRegisterPageWithError(req, resp, "Internal Error");
+            this.redirectToRegisterPageWithError(req, resp, "InternalError");
         } else {
             this.authAndRedirectToHomePage(req, resp, email, password);
         }
-
     }
 
     private void validate(HttpServletRequest req, HttpServletResponse resp,String field, String value) throws ServletException, IOException {
