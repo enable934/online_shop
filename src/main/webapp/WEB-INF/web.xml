@@ -7,4 +7,12 @@
         <servlet-name>indexServlet</servlet-name>
         <url-pattern></url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>itemManagementServlet</servlet-name>
+        <url-pattern>/item/itemManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>itemServlet</servlet-name>
+        <url-pattern>/item</url-pattern>
+    </servlet-mapping>
 </web-app>
