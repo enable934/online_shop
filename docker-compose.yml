@@ -14,9 +14,9 @@ services:
       - ./DB/Update_structure.sql:/docker-entrypoint-initdb.d/Update_structure.sql
 
   tomcat:
-    image: tomcat:latest
+    image: tomee:latest
     volumes:
-      - ./target:/usr/local/tomcat/webapps
+      - ./target:/usr/local/tomee/webapps
     ports:
       - 80:8080
       - 5005:8000
