@@ -23,7 +23,7 @@
                     <div class="card-body">
                         <h5 class="card-title">${item.getName()}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">PC</h6>
-                        <p class="card-text">${item.getDescription()}</p>
+                        <p class="card-text" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">${item.getDescription()}</p>
                         <a href="#" class="btn btn-outline-primary" role="button">Buy</a>
                         <a href="item?id=${item.getId()}" class="btn btn btn-outline-warning" role="button">Open item</a>
                     </div>
