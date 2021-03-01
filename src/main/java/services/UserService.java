@@ -22,15 +22,16 @@ public class UserService {
     public Optional<User> fetchUser(String email, String password) {
         try {
             String passwordHashed = this.passwordHasher.hash(password);
-            ResultSet users = this.dbManager.select("SELECT id, firstname, lastname, phone, address, email FROM customer " +
+            ResultSet users = this.dbManager.select("SELECT id, firstname, lastname, phone, address, email, isadmin FROM customer " +
                     String.format("where email='%s' and password_hash='%s'", email, passwordHashed));
             while (users.next()) {
-                User user = new User(Integer.parseInt(users.getString(1)),
+                User user = new User(users.getInt(1),
                         users.getString(2),
                         users.getString(3),
                         users.getString(4),
                         users.getString(5),
-                        users.getString(6));
+                        users.getString(6),
+                        users.getBoolean(7));
                 return Optional.of(user);
             }
         } catch (Exception e) {
@@ -62,10 +63,10 @@ public class UserService {
                     "join item i on sbi.item_id = i.id " +
                     String.format("where sbi.basket_id = %d", basketId));
             while (itemsInBasket.next()) {
-                int itemId = Integer.parseInt(itemsInBasket.getString(1));
+                int itemId = itemsInBasket.getInt(1);
                 String itemName = itemsInBasket.getString(2);
-                double itemPrice = Double.parseDouble(itemsInBasket.getString(3));
-                int itemsCount = Integer.parseInt(itemsInBasket.getString(4));
+                double itemPrice = itemsInBasket.getDouble(3);
+                int itemsCount = itemsInBasket.getInt(4);
 
                 result.addItem(new ItemInBasketDTO(itemId, itemName, itemPrice, itemsCount));
             }
@@ -84,7 +85,7 @@ public class UserService {
             ResultSet currentItemsCountSelect = this.dbManager.select("SELECT count FROM shopping_basket_item " +
                 String.format("where basket_id=%d and item_id=%d ", basketId, itemId));
             while (currentItemsCountSelect.next()) {
-                currentItemsCount = Integer.parseInt(currentItemsCountSelect.getString(1));
+                currentItemsCount = currentItemsCountSelect.getInt(1);
             }
             if(currentItemsCount == 0){
                 if(isAdd){
@@ -113,7 +114,7 @@ public class UserService {
             ResultSet basket = this.dbManager.select("SELECT id FROM shopping_basket " +
                     String.format("where customer_id=%d and date is null", userId));
             while (basket.next()) {
-                basketId = Integer.parseInt(basket.getString(1));
+                basketId = basket.getInt(1);
             }
         }
         catch (Exception e){}

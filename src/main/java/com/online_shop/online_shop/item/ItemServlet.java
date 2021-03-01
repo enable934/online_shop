@@ -1,4 +1,4 @@
-package com.online_shop.online_shop;
+package com.online_shop.online_shop.item;
 
 import DTOs.ReviewDTO;
 import javaBean.Item;
@@ -36,7 +36,7 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher view = req.getRequestDispatcher("item.jsp");
+        RequestDispatcher view = req.getRequestDispatcher("item/item.jsp");
 
         itemId = Integer.parseInt(req.getParameter("id"));
         reviewScore = -1;

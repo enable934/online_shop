@@ -13,7 +13,7 @@ services:
       - java_db:/var/lib/postgresql/data
       - ./DB/Update_structure.sql:/docker-entrypoint-initdb.d/Update_structure.sql
 
-  tomcat:
+  tomee:
     image: tomee:latest
     volumes:
       - ./target:/usr/local/tomee/webapps

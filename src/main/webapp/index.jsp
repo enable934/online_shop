@@ -22,8 +22,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">${item.getName()}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">PC</h6>
-                        <p class="card-text">${item.getDescription()}</p>
+                        <h6 class="card-subtitle mb-2 text-muted">${item.getPrice()} $</h6>
+                        <p class="card-text" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">${item.getDescription()}</p>
                         <%
                             if (session.getAttribute("user") != null) {
                         %>

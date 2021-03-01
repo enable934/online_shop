@@ -1,7 +1,7 @@
-CREATE TABLE category (id SERIAL NOT NULL, parent_category_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id));
+CREATE TABLE category (id SERIAL NOT NULL, parent_category_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, isDeleted BOOL DEFAULT FALSE, PRIMARY KEY(id));
 CREATE INDEX IDX_64C19C1796A8F92 ON category (parent_category_id);
 CREATE TABLE customer (id SERIAL NOT NULL, firstname VARCHAR(255) NOT NULL, lastname VARCHAR(255) NOT NULL, phone VARCHAR(255) DEFAULT NULL, address VARCHAR(255) DEFAULT NULL, password_hash VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, PRIMARY KEY(id), isAdmin BOOL DEFAULT FALSE);
-CREATE TABLE item (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, price NUMERIC(10, 0) NOT NULL, created_at TIMESTAMP(0) WITH TIME ZONE NOT NULL, PRIMARY KEY(id));
+CREATE TABLE item (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, price NUMERIC(10, 2) NOT NULL, created_at TIMESTAMP(0) WITH TIME ZONE NOT NULL, isDeleted BOOL DEFAULT FALSE, PRIMARY KEY(id));
 CREATE TABLE item_category (id SERIAL NOT NULL, item_id INT NOT NULL, category_id INT NOT NULL, PRIMARY KEY(id));
 CREATE INDEX IDX_6A41D10A126F525E ON item_category (item_id);
         CREATE INDEX IDX_6A41D10A12469DE2 ON item_category (category_id);
@@ -21,6 +21,7 @@ ALTER TABLE review ADD CONSTRAINT FK_794381C69395C3F3 FOREIGN KEY (customer_id) 
 ALTER TABLE shopping_basket ADD CONSTRAINT FK_A9F94AE99395C3F3 FOREIGN KEY (customer_id) REFERENCES customer (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 ALTER TABLE shopping_basket_item ADD CONSTRAINT FK_5683070D1BE1FB52 FOREIGN KEY (basket_id) REFERENCES shopping_basket (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 ALTER TABLE shopping_basket_item ADD CONSTRAINT FK_5683070D126F525E FOREIGN KEY (item_id) REFERENCES item (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE shopping_basket ADD UNIQUE (customer_id, date);
 
 CREATE OR REPLACE FUNCTION create_new_basket() RETURNS TRIGGER AS
 $BODY$
@@ -40,7 +41,8 @@ create trigger new_basket after insert on customer
 
 insert into customer (id, firstname, lastname, password_hash, email, isadmin)
 values(1, 'Dima', 'Ponzel', '1', 'ponzel.dima35@gmail.com', true),
-      (2, 'Orest', 'N', '1', 'o@gmail.com', false);
+      (2, 'Orest', 'N', '1', 'o@gmail.com', false),
+      (3, 'Danya', 'N', '1', 'd@n', false);
 
 insert into item(id, name, description, price, created_at)
 values
