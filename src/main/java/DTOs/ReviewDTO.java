@@ -1,7 +1,5 @@
 package DTOs;
 
-import javaBean.User;
-
 import java.sql.Timestamp;
 
 public class ReviewDTO {

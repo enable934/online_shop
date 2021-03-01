@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="assets/css/header.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
@@ -25,6 +27,10 @@
             <%
                 if (session.getAttribute("user") != null) {
             %>
+            <div class="navbar-basket">
+                <i class="bi bi-basket"></i>
+                <span id="basket-items-count">0</span>
+            </div>
             <span class="navbar-text px-2">
                     Welcome ${sessionScope.user.firstname}!
                 </span>

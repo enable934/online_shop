@@ -24,7 +24,13 @@
                         <h5 class="card-title">${item.getName()}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">PC</h6>
                         <p class="card-text">${item.getDescription()}</p>
-                        <a href="#" class="btn btn-outline-primary" role="button">Buy</a>
+                        <%
+                            if (session.getAttribute("user") != null) {
+                        %>
+                            <a id="${item.getId()}" class="btn btn-outline-primary btn-buy" role="button">Buy</a>
+                        <%
+                            }
+                        %>
                         <a href="item?id=${item.getId()}" class="btn btn btn-outline-warning" role="button">Open item</a>
                     </div>
                 </div>
@@ -35,6 +41,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
             crossorigin="anonymous"></script>
+    <script src="js/global.js"></script>
 </div>
 </body>
 </html>
