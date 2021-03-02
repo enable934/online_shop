@@ -1,4 +1,4 @@
-package com.online_shop.online_shop;
+package com.online_shop.online_shop.user;
 import DTOs.ItemInBasketDTO;
 import javaBean.User;
 import org.json.simple.JSONArray;
@@ -18,7 +18,7 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Scanner;
 
-@WebServlet("/userBasketServlet/*")
+@WebServlet("/userBasketDataServlet/*")
 public class UserBasketServlet extends HttpServlet {
 
     private final UserService userService;
