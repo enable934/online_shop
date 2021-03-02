@@ -1,33 +1,94 @@
-let userBasketData = (callback) => {
-    $.get("userBasketServlet", {}, function(userBasketData) {
-        callback(userBasketData.totalCount);
-    });
-};
+$( document ).ready(function() {
+    userBasketData(generateTable);
+});
 
-let addItemToBasket = (itemId) => {
+let generateTable = (data) => {
+    $('#basket-table-body').empty();
+    data.items.forEach(i => {
+        var item = createRow(i.itemId, i.itemName, i.itemsCount, i.totalPrice);
+        $('#basket-table-body').append(item);
+    });
+
+    $('#basket-total-price').text(data.totalPrice);
+}
+
+let createRow = (itemId, itemName, count, totalPrice) => {
+    var row = document.createElement('tr');
+    row.id = itemId;
+
+    var nameCell = document.createElement('td');
+    nameCell.className = "td-name";
+    nameCell.innerText = itemName;
+
+    var countCell = createCountTd(itemId, count);
+
+    var totalPriceCell = document.createElement('td');
+    totalPriceCell.className = "td-total-price";
+    totalPriceCell.innerText = totalPrice;
+
+    row.appendChild(nameCell);
+    row.appendChild(countCell);
+    row.appendChild(totalPriceCell);
+
+    return row;
+}
+
+let createCountTd = (itemId, count) => {
+    var countCell = document.createElement('td');
+    countCell.className = "td-count";
+
+    var minusButton = document.createElement('button');
+    minusButton.className = "btn-count";
+    minusButton.value = itemId;
+    minusButton.onclick = subtractItem;
+    minusButton.innerText = "M";
+
+    var plusButton = document.createElement('button');
+    plusButton.className = "btn-count";
+    plusButton.value = itemId;
+    plusButton.onclick = addItem;
+    plusButton.innerText = "P";
+
+    var countSpan =  document.createElement('span');
+    countSpan.className = "span-count";
+    countSpan.innerText = count;
+
+    countCell.appendChild(minusButton);
+    countCell.appendChild(countSpan);
+    countCell.appendChild(plusButton);
+
+    return countCell;
+}
+
+let addItem = (e) => {
+    addOrSubtractItemInBasket(e.target.value, true,
+    () => {
+            userBasketData(generateTable);
+            userBasketData(setBasketItemsCount);
+        });
+}
+
+let subtractItem = (e) => {
+    addOrSubtractItemInBasket(e.target.value, false,
+        () => {
+            userBasketData(generateTable);
+            userBasketData(setBasketItemsCount);
+        });
+}
+
+let confirmOrder = () => {
     $.ajax({
-        url: 'userBasketServlet',
-        type: 'PUT',
-        data: {itemId: itemId, isAdd: true},
+        url: 'userBasketDataServlet',
+        type: 'POST',
+        data: {},
         success: function(result) {
+            userBasketData(generateTable);
             userBasketData(setBasketItemsCount);
         },
         error: function(request,msg,error) {
             alert(error);
         }
     });
+
 }
-
-let setBasketItemsCount = (count) => {
-    if(count)
-        $('#basket-items-count').text(count);
-}
-
-$( document ).ready(function() {
-    userBasketData(setBasketItemsCount);
-
-    $('.btn-buy').click(function() {
-        addItemToBasket(this.id);
-    })
-});
 

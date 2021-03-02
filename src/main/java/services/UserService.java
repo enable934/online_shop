@@ -108,6 +108,19 @@ public class UserService {
         }
     }
 
+    public void confirmOrder(int userId) {
+        int basketId = getBasketId(userId);
+        try{
+            this.dbManager.update("UPDATE shopping_basket SET date = current_timestamp " +
+                    String.format("where id=%d", basketId));
+            this.dbManager.update("INSERT INTO shopping_basket (customer_id) " +
+                    String.format("values(%d)", userId));
+        }
+        catch(Exception e){
+            System.out.println("confirmOrder Exception: " + e.getMessage() );
+        }
+    }
+
     private int getBasketId(int userId) {
         int basketId = -1;
         try{

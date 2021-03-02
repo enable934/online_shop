@@ -18,13 +18,13 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Scanner;
 
-@WebServlet("/userBasketDataServlet/*")
-public class UserBasketServlet extends HttpServlet {
+@WebServlet("/user/userBasketDataServlet/*")
+public class UserBasketDataServlet extends HttpServlet {
 
     private final UserService userService;
     private int userId;
 
-    public UserBasketServlet() {
+    public UserBasketDataServlet() {
         this.userService = new UserService();
         userId = -1;
 
@@ -83,6 +83,21 @@ public class UserBasketServlet extends HttpServlet {
         }
         catch(Exception e){
             System.out.println("doPut Exception: " + e.getMessage() );
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        try{
+            HttpSession session = req.getSession();
+            User user = (User)session.getAttribute("user");
+            if(user != null) {
+                userId = user.getId();
+                userService.confirmOrder(userId);
+            }
+        }
+        catch(Exception e){
+            System.out.println("doPost Exception: " + e.getMessage() );
         }
     }
 

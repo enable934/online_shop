@@ -1,16 +1,19 @@
 let userBasketData = (callback) => {
-    $.get("userBasketServlet", {}, function(userBasketData) {
-        callback(userBasketData.totalCount);
+    var prefix = document.location.href.includes("/user/") ? "" : "user/" ;
+    $.get(prefix + "userBasketDataServlet", {}, function(userBasketData) {
+        callback(userBasketData);
     });
 };
 
-let addItemToBasket = (itemId) => {
+let addOrSubtractItemInBasket = (itemId, isAdd, successCallback) => {
+    var prefix = document.location.href.includes("/user/") ? "" : "user/" ;
+
     $.ajax({
-        url: 'userBasketServlet',
+        url: prefix + 'userBasketDataServlet',
         type: 'PUT',
-        data: {itemId: itemId, isAdd: true},
+        data: {itemId: itemId, isAdd: isAdd},
         success: function(result) {
-            userBasketData(setBasketItemsCount);
+            successCallback();
         },
         error: function(request,msg,error) {
             alert(error);
@@ -18,16 +21,16 @@ let addItemToBasket = (itemId) => {
     });
 }
 
-let setBasketItemsCount = (count) => {
-    if(count)
-        $('#basket-items-count').text(count);
+let setBasketItemsCount = (data) => {
+    if(data.totalCount || data.totalCount === 0)
+        $('#basket-items-count').text(data.totalCount);
 }
 
 $( document ).ready(function() {
     userBasketData(setBasketItemsCount);
 
     $('.btn-buy').click(function() {
-        addItemToBasket(this.id);
+        addOrSubtractItemInBasket(this.id, true, () => userBasketData(setBasketItemsCount));
     })
 });
 

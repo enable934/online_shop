@@ -38,8 +38,10 @@
                 if (session.getAttribute("user") != null) {
             %>
             <div class="navbar-basket">
-                <i class="bi bi-basket"></i>
-                <span id="basket-items-count">0</span>
+                <a class="nav-link" href="${pageContext.servletContext.contextPath}/user/userBasket">
+                    <i class="bi bi-basket"></i>
+                    <span id="basket-items-count">0</span>
+                </a>
             </div>
             <span class="navbar-text px-2">
                     Welcome ${sessionScope.user.firstname}!
@@ -56,3 +58,4 @@
         </div>
     </div>
 </nav>
+<script src="js/header.js"></script>
