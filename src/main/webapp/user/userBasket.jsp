@@ -27,7 +27,7 @@
 <div class="container-fluid">
     <jsp:include page="../header.jsp"/>
     <h1>Items in basket:</h1>
-    <table class="table table-striped">
+    <table class="table table-striped table-sm">
         <thead>
         <tr>
             <th>Name</th>
