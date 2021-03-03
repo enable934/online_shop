@@ -23,7 +23,7 @@ public class ItemService {
             if(items == null)
                 writer.println("items == null");
             while(items.next()){
-                Item temp = new Item(items.getInt(1),
+                Item temp = new Item(items.getLong(1),
                         items.getString(2),
                         items.getString(3),
                         items.getFloat(4));
@@ -39,7 +39,6 @@ public class ItemService {
         return result;
     }
 
-    @org.jetbrains.annotations.NotNull
     public Item selectById(int targetId, PrintWriter writer) {
         Item result = null;
 
@@ -48,7 +47,7 @@ public class ItemService {
             if(items == null)
                 writer.println("items == null");
             while(items.next()){
-                return new Item(items.getInt(1),
+                return new Item(items.getLong(1),
                         items.getString(2),
                         items.getString(3),
                         items.getInt(4));
@@ -72,7 +71,7 @@ public class ItemService {
             if(items == null)
                 writer.println("items == null");
             while(items.next()){
-                Item temp = new Item(items.getInt(1),
+                Item temp = new Item(items.getLong(1),
                         items.getString(2),
                         items.getString(3),
                         items.getInt(4));
@@ -109,10 +108,10 @@ public class ItemService {
     }
 
     @org.jetbrains.annotations.NotNull
-    public int update(int targetId, Item targetUpdatedItem, PrintWriter writer) {
+    public int update(Item targetUpdatedItem, PrintWriter writer) {
         try{
             String updateStatement = String.format("UPDATE item SET name = '%s', description = '%s', price = %s where id = %s",
-                    targetUpdatedItem.getName(), targetUpdatedItem.getDescription(), targetUpdatedItem.getPrice(), targetId);
+                    targetUpdatedItem.getName(), targetUpdatedItem.getDescription(), targetUpdatedItem.getPrice(), targetUpdatedItem.getId());
 
             return dbManager.update(updateStatement);
         }

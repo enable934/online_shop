@@ -26,7 +26,7 @@ public class ItemManagementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User currentUser = (User)req.getSession().getAttribute("user");
-        if(currentUser == null || !currentUser.isAdmin()){
+        if(currentUser == null || !currentUser.isAdmin()) {
             resp.sendRedirect("../403.jsp");
             return;
         }

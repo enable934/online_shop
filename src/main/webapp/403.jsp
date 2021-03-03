@@ -17,7 +17,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>CodePen - #Codepenchallenge Persistence is 🔑</title>
+    <title>Access not granted!</title>
 
     <link rel="stylesheet" media="screen"
           href="https://cpwebassets.codepen.io/assets/fullpage/fullpage-4de243a40619a967c0bf13b95e1ac6f8de89d943b7fc8710de33f681fe287604.css">
@@ -45,7 +45,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-    <title>CodePen - #Codepenchallenge Persistence is 🔑</title>
+    <title>Access not granted!</title>
     <script>
         if (document.location.search.match(/type=embed/gi)) {
             window.parent.postMessage("resize", "*");

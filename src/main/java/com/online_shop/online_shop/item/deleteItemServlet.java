@@ -1,6 +1,7 @@
 package com.online_shop.online_shop.item;
 
 import javaBean.Item;
+import javaBean.User;
 import services.ItemService;
 
 import javax.servlet.RequestDispatcher;
@@ -24,15 +25,21 @@ public class deleteItemServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User currentUser = (User)req.getSession().getAttribute("user");
+        if(currentUser == null || !currentUser.isAdmin()) {
+            resp.sendRedirect("../403.jsp");
+            return;
+        }
+
         PrintWriter writer = resp.getWriter();
 
-        try {
-            int targetId = Integer.parseInt(req.getParameter("targetId"));
-            itemService.delete(targetId, writer);
-            resp.sendRedirect(req.getContextPath() + "/item/itemManagement");
+        int targetId = Integer.parseInt(req.getParameter("targetId"));
+        int affectedRows = itemService.delete(targetId, writer);
+
+        if (affectedRows == 0) {
+            getServletContext().getRequestDispatcher("/notfound.jsp").forward(req, resp);
         }
-        catch(Exception ex) {
-            getServletContext().getRequestDispatcher("notfound.jsp").forward(req, resp);
-        }
+
+        resp.sendRedirect(req.getContextPath() + "/item/itemManagement");
     }
 }

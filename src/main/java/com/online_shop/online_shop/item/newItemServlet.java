@@ -1,6 +1,7 @@
 package com.online_shop.online_shop.item;
 
 import javaBean.Item;
+import javaBean.User;
 import services.ItemService;
 
 import javax.servlet.RequestDispatcher;
@@ -23,12 +24,22 @@ public class newItemServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User currentUser = (User)req.getSession().getAttribute("user");
+        if(currentUser == null || !currentUser.isAdmin()) {
+            resp.sendRedirect("../403.jsp");
+            return;
+        }
         getServletContext().getRequestDispatcher("/item/newItem.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
+        User currentUser = (User)req.getSession().getAttribute("user");
+        if(currentUser == null || !currentUser.isAdmin()){
+            resp.sendRedirect("../403.jsp");
+            return;
+        }
+
         PrintWriter writer = resp.getWriter();
 
         String itemName = req.getParameter("itemName");
