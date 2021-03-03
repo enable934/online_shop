@@ -4,12 +4,13 @@ $( document ).ready(function() {
 
 let generateTable = (data) => {
     $('#basket-table-body').empty();
+    data.items.sort((a, b) => a.itemId - b.itemId);
     data.items.forEach(i => {
         var item = createRow(i.itemId, i.itemName, i.itemsCount, i.totalPrice);
         $('#basket-table-body').append(item);
     });
 
-    $('#basket-total-price').text(data.totalPrice);
+    $('#basket-total-price').text((Math.round(data.totalPrice * 100) / 100) + '$');
 }
 
 let createRow = (itemId, itemName, count, totalPrice) => {
@@ -24,7 +25,7 @@ let createRow = (itemId, itemName, count, totalPrice) => {
 
     var totalPriceCell = document.createElement('td');
     totalPriceCell.className = "td-total-price";
-    totalPriceCell.innerText = totalPrice + '$';
+    totalPriceCell.innerText = (Math.round(totalPrice * 100) / 100) + '$';
 
     row.appendChild(nameCell);
     row.appendChild(countCell);

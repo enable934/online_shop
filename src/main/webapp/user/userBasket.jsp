@@ -25,7 +25,17 @@
             margin: 0 10px;
         }
         .span-count {
-            margin: 0 10px;
+            margin: 0 5px;
+            width: 20px;
+        }
+        .td-name {
+            width: 60%;
+        }
+        .td-count {
+            width: 20%;
+        }
+        .td-total-price {
+            width: 20%;
         }
     </style>
 </head>
