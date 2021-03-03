@@ -24,7 +24,7 @@ let createRow = (itemId, itemName, count, totalPrice) => {
 
     var totalPriceCell = document.createElement('td');
     totalPriceCell.className = "td-total-price";
-    totalPriceCell.innerText = totalPrice;
+    totalPriceCell.innerText = totalPrice + '$';
 
     row.appendChild(nameCell);
     row.appendChild(countCell);
