@@ -1,6 +1,5 @@
 package services;
 
-import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 
@@ -16,14 +15,20 @@ public class DBManager {
     public ResultSet select(String selectQuery) throws SQLException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException {
         Connection conn = getConnection();
         Statement statement = conn.createStatement();
-        return statement.executeQuery(selectQuery);
+        ResultSet result = statement.executeQuery(selectQuery);
+        conn.close();
+
+        return result;
     }
 
     // In this perfect language executeUpdate used for INSERT/UPDATE/DELETE ...
     public int update(String updateQuery) throws SQLException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException {
         Connection conn = getConnection();
         Statement statement = conn.createStatement();
-        return statement.executeUpdate(updateQuery);
+        int result = statement.executeUpdate(updateQuery);
+        conn.close();
+
+        return result;
     }
 
 }
