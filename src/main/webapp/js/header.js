@@ -22,7 +22,7 @@ let addOrSubtractItemInBasket = (itemId, isAdd, successCallback) => {
 }
 
 let setBasketItemsCount = (data) => {
-    if(data.totalCount || data.totalCount === 0)
+    if(data.totalCount !== undefined)
         $('#basket-items-count').text(data.totalCount);
 }
 

@@ -90,13 +90,13 @@ public class UserService {
             if(currentItemsCount == 0){
                 if(isAdd){
                     this.dbManager.update("INSERT INTO shopping_basket_item (basket_id, item_id, count) " +
-                        String.format("values(%d, %d, 1)", basketId, itemId, ++currentItemsCount));
+                        String.format("values(%d, %d, 1)", basketId, itemId, currentItemsCount + 1));
                 }
             }
             else{
                 if(isAdd || (!isAdd && currentItemsCount > 1))
                     this.dbManager.update("UPDATE shopping_basket_item " +
-                        String.format("set count=%d ", isAdd ? ++currentItemsCount : --currentItemsCount) +
+                        String.format("set count=%d ", isAdd ? currentItemsCount + 1 : currentItemsCount - 1) +
                         String.format("where basket_id=%d and item_id=%d", basketId, itemId));
                 if(!isAdd && currentItemsCount == 1)
                     this.dbManager.update("DELETE FROM shopping_basket_item " +

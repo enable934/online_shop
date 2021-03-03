@@ -21,6 +21,12 @@
         table, th, td {
             border: 1px solid black;
         }
+        #basket-total-price {
+            margin: 0 10px;
+        }
+        .span-count {
+            margin: 0 10px;
+        }
     </style>
 </head>
 <body>
