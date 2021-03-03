@@ -41,13 +41,13 @@ let createCountTd = (itemId, count) => {
     minusButton.className = "btn-count";
     minusButton.value = itemId;
     minusButton.onclick = subtractItem;
-    minusButton.innerText = "M";
+    minusButton.innerText = "-";
 
     var plusButton = document.createElement('button');
     plusButton.className = "btn-count";
     plusButton.value = itemId;
     plusButton.onclick = addItem;
-    plusButton.innerText = "P";
+    plusButton.innerText = "+";
 
     var countSpan =  document.createElement('span');
     countSpan.className = "span-count";
