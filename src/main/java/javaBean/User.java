@@ -1,5 +1,10 @@
 package javaBean;
+import javax.ejb.EntityBean;
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class User {
     private final int id;
     private final String firstname;
