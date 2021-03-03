@@ -6,12 +6,19 @@ import javax.persistence.*;
 @Entity
 @Table
 public class User {
+    @Column(name = "id")
     private final int id;
+    @Column(name = "firstname")
     private final String firstname;
+    @Column(name = "lastname")
     private final String lastname;
+    @Column(name = "phone")
     private final String phone;
+    @Column(name = "address")
     private final String address;
+    @Column(name = "email")
     private final String email;
+    @Column(name = "isadmin")
     private final Boolean isAdmin;
 
     public User(int id, String firstname, String lastname, String phone, String address, String email, Boolean isAdmin){
