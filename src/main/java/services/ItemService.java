@@ -4,7 +4,6 @@ import javaBean.Item;
 
 import java.io.PrintWriter;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class ItemService {
