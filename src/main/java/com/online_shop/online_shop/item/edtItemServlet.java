@@ -78,9 +78,9 @@ public class edtItemServlet extends HttpServlet {
         float itemPrice = Float.parseFloat(req.getParameter(priceKey));
 
         clearSession(session);
-        if (!this.validate(req,resp,nameKey, itemName)
-                || !this.validate(req,resp,desKey, itemDescription)
-                || !this.validate(req,resp,priceKey, itemPrice)) {
+        if (!this.validate(req, resp, nameKey, itemName)
+                || !this.validate(req, resp, desKey, itemDescription)
+                || !this.validate(req, resp, priceKey, itemPrice)) {
             return;
         }
 
