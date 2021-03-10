@@ -17,6 +17,9 @@ import java.io.PrintWriter;
 public class newItemServlet extends HttpServlet {
 
     private final ItemService itemService;
+    private final String nameKey = "itemName";
+    private final String desKey = "itemDescription";
+    private final String priceKey = "itemPrice";
 
     public newItemServlet() {
         this.itemService = new ItemService();
@@ -42,12 +45,14 @@ public class newItemServlet extends HttpServlet {
 
         PrintWriter writer = resp.getWriter();
 
-        String itemName = req.getParameter("itemName");
-        String itemDescription = req.getParameter("itemDescription");
-        float itemPrice = Float.parseFloat(req.getParameter("itemPrice"));
-        this.validate(req,resp,"itemName", itemName);
-        this.validate(req,resp,"itemDescription", itemDescription);
-        this.validate(req,resp,"itemPrice", itemPrice);
+        String itemName = req.getParameter(nameKey);
+        String itemDescription = req.getParameter(desKey);
+        float itemPrice = Float.parseFloat(req.getParameter(priceKey));
+        if (!this.validate(req, resp, nameKey, itemName)
+                || !this.validate(req, resp, desKey, itemDescription)
+                || !this.validate(req, resp, priceKey, itemPrice)) {
+            return;
+        }
 
         Item newItem = new Item(itemName, itemDescription, itemPrice);
         int rowsAffected = itemService.addItem(newItem, writer);
@@ -60,16 +65,22 @@ public class newItemServlet extends HttpServlet {
         view.forward(req, resp);
     }
 
-    private void validate(HttpServletRequest req, HttpServletResponse resp,String field, String value) throws ServletException, IOException {
+    private boolean validate(HttpServletRequest req, HttpServletResponse resp,String field, String value) throws ServletException, IOException {
         if(value == null) {
             this.redirectToNewItemPageWithError(req,resp,field);
+            return false;
         }
+
+        return true;
     }
 
-    private void validate(HttpServletRequest req, HttpServletResponse resp,String field, float value) throws ServletException, IOException {
+    private boolean validate(HttpServletRequest req, HttpServletResponse resp,String field, float value) throws ServletException, IOException {
         if(value <= 0) {
             this.redirectToNewItemPageWithError(req,resp,field);
+            return false;
         }
+
+        return true;
     }
 
     private void redirectToNewItemPageWithError(HttpServletRequest req, HttpServletResponse resp, String field) throws ServletException, IOException {

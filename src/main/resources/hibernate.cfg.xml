@@ -12,7 +12,7 @@
   <property name="show_sql">true</property>
 
   <!-- DB schema will be updated if needed -->
-  <mapping class="hibernate.dao.ItemEntity"/>
+  <mapping class="hibernate.entity.ItemEntity"/>
   <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
 </session-factory>
 </hibernate-configuration>

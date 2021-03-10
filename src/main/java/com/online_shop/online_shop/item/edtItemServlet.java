@@ -1,6 +1,5 @@
 package com.online_shop.online_shop.item;
 
-import DTOs.ReviewDTO;
 import javaBean.Item;
 import javaBean.User;
 import services.ItemService;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 @WebServlet(name = "editItemServlet", value = "/item/editItem")
 public class edtItemServlet extends HttpServlet {
@@ -78,9 +76,9 @@ public class edtItemServlet extends HttpServlet {
         float itemPrice = Float.parseFloat(req.getParameter(priceKey));
 
         clearSession(session);
-        if (!this.validate(req,resp,nameKey, itemName)
-                || !this.validate(req,resp,desKey, itemDescription)
-                || !this.validate(req,resp,priceKey, itemPrice)) {
+        if (!this.validate(req, resp, nameKey, itemName)
+                || !this.validate(req, resp, desKey, itemDescription)
+                || !this.validate(req, resp, priceKey, itemPrice)) {
             return;
         }
 
