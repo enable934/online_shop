@@ -19,6 +19,8 @@ public class User {
     private String email;
     @Column(name = "isadmin")
     private Boolean isAdmin;
+    @Column(name = "password_hash")
+    private String passwordHash;
 
     public int getId() {
         return id;

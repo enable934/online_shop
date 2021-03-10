@@ -15,7 +15,6 @@ import java.util.Optional;
 @Stateful
 public class UserService {
     private final PasswordHasher passwordHasher = new PasswordHasher();
-    private EntityManager entityManager;
     private final DBManager dbManager = new DBManager();
 
     public Optional<User> fetchUser(String email, String password) {
@@ -26,21 +25,17 @@ public class UserService {
 
             emFactoryObj = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 
-
             EntityManager em = emFactoryObj.createEntityManager();
             if (em == null) throw new NullPointerException("myBarEntityManager not injected");
-            User u = em.find(User.class,1);
-            ResultSet users = this.dbManager.select("SELECT id, firstname, lastname, phone, address, email, isadmin FROM customer " +
-                    String.format("where email='%s' and password_hash='%s'", email, passwordHashed));
-            while (users.next()) {
-                User user = new User();
-                return Optional.of(user);
-            }
-        } catch (InstantiationException | ClassNotFoundException | IllegalAccessException | SQLException | NoSuchMethodException | InvocationTargetException e) {
+
+            Query query = em.createQuery("SELECT u FROM User u WHERE u.email=:email and u.passwordHash=:password_hash");
+            query.setParameter("email", email);
+            query.setParameter("password_hash", passwordHashed);
+            User user = (User) query.getSingleResult();
+            return Optional.of(user);
+        } catch (Exception e) {
             return Optional.empty();
         }
-
-        return Optional.empty();
     }
 
     public int registerNewUser(String firstname, String lastname, String email, String password) {
@@ -75,6 +70,7 @@ public class UserService {
 
             return result;
         } catch (Exception e) {
+
         }
 
         return new UserBasketDTO(0);
