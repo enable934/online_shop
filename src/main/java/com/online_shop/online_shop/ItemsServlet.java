@@ -1,13 +1,9 @@
 package com.online_shop.online_shop;
 
-import hibernate.dao.ItemEntity;
-import hibernate.utils.HibernateSessionFactory;
 import javaBean.Item;
-import org.hibernate.Session;
 import services.ItemService;
 
 import java.io.*;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

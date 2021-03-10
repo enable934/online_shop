@@ -2,8 +2,6 @@ package com.online_shop.online_shop.item;
 
 import DTOs.ReviewDTO;
 import javaBean.Item;
-import javaBean.Review;
-import javaBean.User;
 import services.ItemService;
 import services.ReviewService;
 
@@ -13,11 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet(name = "itemServlet", value = "/item")
 public class ItemServlet extends HttpServlet {
