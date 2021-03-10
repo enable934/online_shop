@@ -4,37 +4,39 @@ import DTOs.ItemInBasketDTO;
 import DTOs.UserBasketDTO;
 import javaBean.User;
 
+import javax.ejb.Stateful;
+import javax.ejb.Stateless;
+import javax.persistence.*;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
+@Stateful
 public class UserService {
-    private final PasswordHasher passwordHasher;
-    private final DBManager dbManager;
-
-    public UserService() {
-
-        this.passwordHasher = new PasswordHasher();
-        this.dbManager = new DBManager();
-    }
+    private final PasswordHasher passwordHasher = new PasswordHasher();
+    private EntityManager entityManager;
+    private final DBManager dbManager = new DBManager();
 
     public Optional<User> fetchUser(String email, String password) {
         try {
             String passwordHashed = this.passwordHasher.hash(password);
+            EntityManagerFactory emFactoryObj;
+            String PERSISTENCE_UNIT_NAME = "DefaultManager";
+
+            emFactoryObj = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+
+
+            EntityManager em = emFactoryObj.createEntityManager();
+            if (em == null) throw new NullPointerException("myBarEntityManager not injected");
+            User u = em.find(User.class,1);
             ResultSet users = this.dbManager.select("SELECT id, firstname, lastname, phone, address, email, isadmin FROM customer " +
                     String.format("where email='%s' and password_hash='%s'", email, passwordHashed));
             while (users.next()) {
-                User user = new User(users.getInt(1),
-                        users.getString(2),
-                        users.getString(3),
-                        users.getString(4),
-                        users.getString(5),
-                        users.getString(6),
-                        users.getBoolean(7));
+                User user = new User();
                 return Optional.of(user);
             }
-        } catch (Exception e) {
+        } catch (InstantiationException | ClassNotFoundException | IllegalAccessException | SQLException | NoSuchMethodException | InvocationTargetException e) {
             return Optional.empty();
         }
 
