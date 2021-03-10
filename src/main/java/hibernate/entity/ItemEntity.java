@@ -1,23 +1,32 @@
-package hibernate.dao;
-
-import net.bytebuddy.implementation.bind.annotation.Default;
+package hibernate.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "item", schema = "public", catalog = "online_shop")
-public class ItemEntity {
+public class ItemEntity implements Serializable {
+
+    private static final long serialVersionUID = 5245577327086935320L;
+
     private Long id;
     private String name;
     private String description;
-    private int price;
+    private float price;
     private Timestamp createdAt;
     private Boolean isdeleted;
 
     public ItemEntity() {
         createdAt = new Timestamp(System.currentTimeMillis());
         isdeleted = false;
+    }
+
+    public ItemEntity(String name, String description, float price) {
+        this();
+        this.name = name;
+        this.description = description;
+        this.price = price;
     }
 
     @Id
@@ -53,11 +62,11 @@ public class ItemEntity {
 
     @Basic
     @Column(name = "price", nullable = false, precision = 0)
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -103,7 +112,7 @@ public class ItemEntity {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + price;
+        result = (int) (31 * result + price);
         result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
         result = 31 * result + (isdeleted != null ? isdeleted.hashCode() : 0);
         return result;
