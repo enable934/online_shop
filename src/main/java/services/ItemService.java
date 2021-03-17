@@ -186,28 +186,6 @@ public class ItemService {
         return 0;
     }
 
-    /*@org.jetbrains.annotations.NotNull
-    public Boolean addItemViaHibernate(String name, String descriiption, float price) {
-
-        try (Session session = HibernateSessionFactory.getSessionFactory().openSession()) {
-            session.beginTransaction();
-
-            ItemEntity itemEntity = new ItemEntity();
-
-            itemEntity.setName(name);
-            itemEntity.setDescription(descriiption);
-            itemEntity.setPrice(price);
-
-            session.save(itemEntity);
-            session.getTransaction().commit();
-        }
-        catch (Exception e) {
-            return false;
-        }
-
-        return true;
-    }*/
-
     @org.jetbrains.annotations.NotNull
     public Long addItemViaHibernate(String name, String description, float price) {
         ItemEntity item = new ItemEntity(name, description, price);
