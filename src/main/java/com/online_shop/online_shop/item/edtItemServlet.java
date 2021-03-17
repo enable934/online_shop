@@ -88,8 +88,7 @@ public class edtItemServlet extends HttpServlet {
             return;
         }
 
-        int rowsAffected = itemService.update(newItem, writer);
-        if (rowsAffected < 1) {
+        if (!itemService.updateItemViaHibernate(newItem.getId(), newItem.getName(), newItem.getDescription(), newItem.getPrice())) {
             this.redirectToEditItemPageWithError(req, resp, errorKey);
             return;
         }

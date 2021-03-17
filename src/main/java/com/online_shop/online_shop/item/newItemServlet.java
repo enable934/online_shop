@@ -54,9 +54,8 @@ public class newItemServlet extends HttpServlet {
             return;
         }
 
-        Item newItem = new Item(itemName, itemDescription, itemPrice);
-        int rowsAffected = itemService.addItem(newItem, writer);
-        if (rowsAffected < 1) {
+        Long result = itemService.addItemViaHibernate(itemName, itemDescription, itemPrice);
+        if (result == -1L) {
             this.redirectToNewItemPageWithError(req, resp, "InternalError");
         }
 

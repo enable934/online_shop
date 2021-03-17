@@ -1,6 +1,8 @@
 package hibernate.entity;
 
 import javax.persistence.*;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -118,3 +120,4 @@ public class ItemEntity implements Serializable {
         return result;
     }
 }
+

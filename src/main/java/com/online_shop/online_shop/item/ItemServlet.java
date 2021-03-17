@@ -1,6 +1,7 @@
 package com.online_shop.online_shop.item;
 
 import DTOs.ReviewDTO;
+import hibernate.entity.ItemEntity;
 import javaBean.Item;
 import services.ItemService;
 import services.ReviewService;
@@ -20,13 +21,13 @@ public class ItemServlet extends HttpServlet {
 
     private final ItemService itemService;
     private final ReviewService reviewService;
-    private int itemId;
+    private Long itemId;
     private int reviewScore;
 
     public ItemServlet() {
         this.itemService = new ItemService();
         this.reviewService = new ReviewService();
-        itemId = -1;
+        itemId = -1L;
         reviewScore = -1;
     }
 
@@ -34,11 +35,11 @@ public class ItemServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher view = req.getRequestDispatcher("item/item.jsp");
 
-        itemId = Integer.parseInt(req.getParameter("id"));
+        itemId = Long.parseLong(req.getParameter("id"));
         reviewScore = -1;
         PrintWriter writer = resp.getWriter();
 
-        Item targetItem = itemService.selectById(itemId, writer);
+        ItemEntity targetItem = itemService.getViaHibernate(itemId);
         ArrayList<ReviewDTO> reviewForCurrentItem = reviewService.selectForItem(itemId, writer);
 
         if (reviewForCurrentItem.size() > 0) {

@@ -1,5 +1,6 @@
 package com.online_shop.online_shop.item;
 
+import hibernate.entity.ItemEntity;
 import javaBean.Item;
 import javaBean.User;
 import services.ItemService;
@@ -32,7 +33,7 @@ public class ItemManagementServlet extends HttpServlet {
         }
         PrintWriter writer = resp.getWriter();
 
-        ArrayList<Item> result = itemService.select(writer);
+        ArrayList<ItemEntity> result = itemService.getAllViaHibernate();
 
         writer.println(result.size());
         req.setAttribute("items", result);

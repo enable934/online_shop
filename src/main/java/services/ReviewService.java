@@ -16,7 +16,7 @@ public class ReviewService {
     }
 
     @org.jetbrains.annotations.NotNull
-    public ArrayList<ReviewDTO> selectForItem(int targetItemId, PrintWriter writer) {
+    public ArrayList<ReviewDTO> selectForItem(Long targetItemId, PrintWriter writer) {
         ArrayList<ReviewDTO> result = new ArrayList<ReviewDTO>();
 
         try{

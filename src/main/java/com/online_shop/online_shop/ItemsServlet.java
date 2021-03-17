@@ -23,21 +23,6 @@ public class ItemsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
 
-        /*Session session = HibernateSessionFactory.getSessionFactory().openSession();
-
-        session.beginTransaction();
-
-        ItemEntity itemEntity = new ItemEntity();
-
-        itemEntity.setName("TESTHIB1");
-        itemEntity.setDescription("TESTHIB1");
-        itemEntity.setPrice(100);
-
-        session.save(itemEntity);
-        session.getTransaction().commit();
-
-        session.close();*/
-
         ArrayList<Item> result = itemService.select(writer);
 
         writer.println(result.size());

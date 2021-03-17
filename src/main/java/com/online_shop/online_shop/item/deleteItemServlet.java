@@ -30,10 +30,9 @@ public class deleteItemServlet extends HttpServlet {
 
         PrintWriter writer = resp.getWriter();
 
-        int targetId = Integer.parseInt(req.getParameter("targetId"));
-        int affectedRows = itemService.delete(targetId, writer);
+        Long targetId = Long.parseLong(req.getParameter("targetId"));
 
-        if (affectedRows == 0) {
+        if (!itemService.deleteItemViaHibernate(targetId)) {
             getServletContext().getRequestDispatcher("/notfound.jsp").forward(req, resp);
         }
 
